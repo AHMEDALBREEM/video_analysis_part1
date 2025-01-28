@@ -1,0 +1,57 @@
+Audio Segments Details:
+========================
+
+Segment 1:
+Start Time: 0.00 seconds
+End Time: 1.58 seconds
+Duration: 1.58 seconds
+Text: I'm looking for a kitchen paper.
+Word Count: 7
+Words per Second: 4.43
+Confidence (avg_logprob): -0.5231
+------------------------
+Segment 3:
+Start Time: 2.78 seconds
+End Time: 5.78 seconds
+Duration: 3.00 seconds
+Text: A paper for the kitchen to clean spills.
+Word Count: 8
+Words per Second: 2.67
+Confidence (avg_logprob): -0.5231
+------------------------
+Segment 9:
+Start Time: 11.22 seconds
+End Time: 15.32 seconds
+Duration: 4.10 seconds
+Text: And I also need the oven paper for the oven.
+Word Count: 10
+Words per Second: 2.44
+Confidence (avg_logprob): -0.5231
+------------------------
+Segment 15:
+Start Time: 23.56 seconds
+End Time: 25.30 seconds
+Duration: 1.74 seconds
+Text: And do you have the other one?
+Word Count: 7
+Words per Second: 4.02
+Confidence (avg_logprob): -0.5231
+------------------------
+Segment 28:
+Start Time: 45.48 seconds
+End Time: 47.24 seconds
+Duration: 1.76 seconds
+Text: Okay, you can go to the checkout.
+Word Count: 7
+Words per Second: 3.98
+Confidence (avg_logprob): -0.4978
+------------------------
+
+Most Frequent (Loudest) Words:
+========================
+Word: paper - Frequency: 3
+Word: kitchen - Frequency: 2
+Word: looking - Frequency: 1
+Word: clean - Frequency: 1
+Word: spills - Frequency: 1
+Word: checkout - Frequency: 1

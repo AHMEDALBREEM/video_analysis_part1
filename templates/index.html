@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      max-width: 600px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    .response {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Audio/Video for Transcription</h1>
+  
+  <form id="uploadForm">
+    <label for="fileInput">Select a file:</label>
+    <input type="file" id="fileInput" name="file" accept=".mp4, .mkv, .avi, .wav, .mp3" required>
+    <br><br>
+
+    <label for="languageSelect">Select language:</label>
+    <select id="languageSelect" name="language">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <!-- Add more language options as needed -->
+    </select>
+    <br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+
+  <div class="response" id="response" style="display: none;"></div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent page reload
+
+      const fileInput = document.getElementById('fileInput');
+      const languageSelect = document.getElementById('languageSelect');
+      const responseDiv = document.getElementById('response');
+
+      responseDiv.style.display = 'none'; // Hide response area initially
+      responseDiv.textContent = ''; // Clear previous response
+
+      const file = fileInput.files[0];
+      if (!file) {
+        responseDiv.style.display = 'block';
+        responseDiv.className = 'response error';
+        responseDiv.textContent = 'Please select a file to upload.';
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('language', languageSelect.value);
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const contentType = response.headers.get('Content-Type');
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          if (data.error) {
+            responseDiv.style.display = 'block';
+            responseDiv.className = 'response error';
+            responseDiv.textContent = `Error: ${data.error}`;
+          } else {
+            responseDiv.style.display = 'block';
+            responseDiv.className = 'response';
+            responseDiv.textContent = `Success: ${data.message}`;
+          }
+        } else if (contentType.includes('text/plain')) {
+          const text = await response.text();
+          responseDiv.style.display = 'block';
+          responseDiv.className = 'response';
+          responseDiv.textContent = `Transcription received:\n\n${text}`;
+        } else {
+          throw new Error('Unexpected content type');
+        }
+      } catch (error) {
+        responseDiv.style.display = 'block';
+        responseDiv.className = 'response error';
+        responseDiv.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
