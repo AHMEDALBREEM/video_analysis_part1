@@ -18,7 +18,7 @@ This project is a Flask web application that allows users to upload audio or vid
    ```
 2. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install Whisper Flask and so on 
    ```
 
 ## Usage
